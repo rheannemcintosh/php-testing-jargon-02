@@ -1,0 +1,22 @@
+{
+    "name": "rheannemcintosh/php-testing-jargon-02",
+    "authors": [
+        {
+            "name": "Rheanne McIntosh",
+            "email": "rheanne.mcintosh@visualsoft.co.uk"
+        }
+    ],
+    "require": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    }
+}
