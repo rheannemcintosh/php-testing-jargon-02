@@ -51,4 +51,47 @@ class QuizTest extends TestCase
 
         $this->assertEquals(0, $quiz->grade());
     }
+
+    /**
+     * @test
+     */
+    public function it_correctly_tracks_the_next_question_in_the_queue()
+    {
+        $quiz = new Quiz();
+        
+        $quiz->addQuestion(new Question("What is 2 + 2?", 4));
+        $quiz->addQuestion(new Question("What is 3 * 3?", 9));
+
+        $questionOne = $quiz->nextQuestion();
+        $questionTwo = $quiz->nextQuestion();
+
+        $this->assertEquals($questionTwo, $quiz->getQuestion(1));
+    }
+
+    public function it_returns_false_if_there_are_no_remaining_next_questions()
+    {
+        $quiz = new Quiz();
+        
+        $quiz->addQuestion(new Question("What is 2 + 2?", 4));
+
+        $quiz->nextQuestion();
+        $this->assertFalse($quiz->nextQuestion());
+    }
+
+    /**
+     * @test
+     */
+    public function it_cannot_be_graded_until_all_questions_have_been_answered()
+    {
+        $quiz = new Quiz();
+
+        $quiz->addQuestion(new Question("What is 2 + 2?", 4));
+        $quiz->addQuestion(new Question("What is 3 * 3?", 9));
+        $quiz->addQuestion(new Question("What is 7 - 3?", 4));
+        $quiz->addQuestion(new Question("What is 81 / 9?", 9));
+
+        $this->expectException(\Exception::class);
+
+        $quiz->grade();
+    }
 }

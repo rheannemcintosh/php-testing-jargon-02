@@ -15,6 +15,11 @@ class Question
         $this->solution = $solution;
     }
 
+    public function answered()
+    {
+        return isset($this->answer);
+    }
+
     public function answer($answer)
     {
         $this->answer = $answer;
