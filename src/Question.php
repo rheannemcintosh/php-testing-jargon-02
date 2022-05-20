@@ -7,7 +7,7 @@ class Question
     protected $body;
     protected $solution;
     protected $answer;
-    protected $correct;
+    protected $solved;
 
     public function __construct($body, $solution)
     {
@@ -23,11 +23,12 @@ class Question
     public function answer($answer)
     {
         $this->answer = $answer;
-        return $this->correct = $answer === $this->solution;
+
+        return $this->solved();
     }
 
-    public function isCorrect()
+    public function solved()
     {
-        return $this->correct;
+        return $this->answer ===  $this->solution;
     }
 }
